@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9314D03-FE3F-416F-9712-65B4CD1F011C}</ProjectGuid>
+    <ProjectGuid>{235EEE43-BB46-44B5-8382-24C9F6E313AA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MsgElf</RootNamespace>
     <AssemblyName>MsgElf</AssemblyName>
@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,7 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,7 +64,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +95,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Unity">
+      <Version>8.1.97</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\MsgElf.Home\MsgElf.Home.csproj">
+      <Project>{d2151e0e-4d44-45f1-9430-a6c83e02a8b7}</Project>
+      <Name>MsgElf.Home</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MsgElf.Core\MsgElf.Core.csproj">
+      <Project>{4a948949-c75d-4552-9318-f30301f9e5c0}</Project>
+      <Name>MsgElf.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
