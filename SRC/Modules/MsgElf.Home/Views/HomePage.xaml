@@ -5,14 +5,77 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MsgElf.Home.Views"
              xmlns:prism="http://prismlibrary.com/"
+             Background="Black"
+             Foreground="White"
+             xmlns:models="clr-namespace:MsgElf.Core.Models;assembly=MsgElf.Core"
+             xmlns:viewmodels="clr-namespace:MsgElf.Home.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HomePageViewModel}"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converters="clr-namespace:MsgElf.Core.Converters;assembly=MsgElf.Core"
+             xmlns:modernWpf="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="HomePage"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+             d:DesignHeight="543.346"
+             d:DesignWidth="403.346">
+    <UserControl.Resources>
+        <converters:TimeSpanToDateTimeConverter x:Key="TimeSpanToDateTime"/>
+        <DataTemplate DataType="{x:Type models:MessageInfo}">
+            <Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Left">
+                        <TextBlock Text="间隔："
+                                   VerticalAlignment="Center"
+                                   FontSize="16"
+                                   Margin="4"/>
+                        <modernWpf:SimpleTimePicker PickerVisibility="All" 
+                                                    Culture="de-DE"
+                                                    SelectedDateTime="{Binding Interval, Converter={StaticResource TimeSpanToDateTime}}" />
+                        <TextBlock Text="{Binding Interval.Milliseconds, StringFormat=:{0}}"
+                                   VerticalAlignment="Center"
+                                   FontSize="18"
+                                   Margin="4, 0"/>
+                    </StackPanel>
+                    <Border Grid.Row="1">
+                        <TextBox Text="{Binding Text}"
+                                 Margin="4"/>
+                    </Border>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="配置以发送"
+                   FontSize="25" 
+                   Margin="0, 0, 0, 20"/>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Messages}"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Margin="4"
+                 VirtualizingPanel.ScrollUnit="Pixel"
+                 SelectedItem="{Binding ComingSoon}"
+                     MinWidth="100"></ListBox>
+            <Button Grid.Row="2" 
+                    VerticalAlignment="Top"
+                    Content="添加新消息" 
+                    Foreground="White"
+                    Margin="4"
+                    Command="{Binding NewMessageCommand}"/>
+        <Button Grid.Row="3"
+                Content="发送" 
+                Foreground="White"
+                Padding="30, 5"
+                Margin="4"
+                Command="{Binding SendCommand}"/>
     </Grid>
 </UserControl>

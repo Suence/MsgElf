@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,6 +77,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ModernWpfUI">
+      <Version>0.9.4</Version>
+    </PackageReference>
+    <PackageReference Include="ModernWpfUI.MahApps">
+      <Version>0.9.4</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Wpf">
       <Version>8.1.97</Version>
     </PackageReference>
